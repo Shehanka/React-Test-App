@@ -22,15 +22,37 @@ class App extends Component {
       {
         id: 3,
         title: 'Visit to course web',
-        completed: false
+        completed: true
       },
     ]
   }
 
+
+  //Toggle complete
+  markComplete = (id) => {
+     this.setState({ todos: this.state.todos.map(todo => {
+       if (todo.id === id) {
+         todo.completed = !todo.completed
+       }
+       return todo;
+     }) });
+  }
+
+  //Delete Todo
+  delTodo = (id) = {
+    this.setState({
+      todos: [...this.state.todos.filter(todo => todo.id != id)]
+    });
+  } 
+
   render() {
     return (
       <div className="App">
-        <Todos/>
+        <Todos 
+        todos={this.state.todos} 
+        markComplete={this.markComplete}
+        delTodo={this.delTodo}
+        />
       </div>
     );
   }
